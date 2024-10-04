@@ -5,7 +5,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 class LogisticRegression:
-    def __init__(self, learning_rate=0.01, num_iterations=100):
+    def __init__(self, learning_rate=0.01, num_iterations=1000):
         self.learning_rate = learning_rate
         self.num_iterations = num_iterations
         self.weights = None
@@ -21,6 +21,7 @@ class LogisticRegression:
         return -np.mean(y_true * np.log(y_pred + 1e-10) + (1 - y_true) * np.log(1 - y_pred + 1e-10))
 
     def fit(self, X, y):
+        print(self.learning_rate)
         num_samples, num_features = X.shape
         self.weights = np.zeros(num_features)
         self.bias = 0

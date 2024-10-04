@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Auction - Login</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static '' %}" alt="Smart Auction Logo">
+        </div>
+        <div class="header-title">
+            <h1>Auction System</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="login-form">
+            <h2>Login In</h2>
+            <form>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p>Don’t have an account? <a href="#">Register</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
