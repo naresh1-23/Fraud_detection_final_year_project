@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #dcb882, #b17438);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+}
+
+.logo {
+    position: absolute;
+    left: 45px;
+    top: 5px;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+.header-title h1 {
+    margin: 0;
+    font-size: 60px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.container {
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px; /* To adjust the container position below the header */
+}
+
+.login-form h2 {
+    text-align: center;
+    color: #ff8c00;
+    margin-bottom: 20px;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-me input {
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color: #a36332;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #8c5526;
+}
+
+.login-form p {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.login-form a {
+    color: #0000ee;
+    text-decoration: none;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
