@@ -22,17 +22,16 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    SELLER = "Seller"
-    NORMAL_USER = "Normal User"
-    DELIVERY_PERSON = "Delivery Person"
+    AUCTIONEER = "Auctioneer"
+    BIDDER = "Bidder"
     USER_ROLES = (
-        (SELLER,  SELLER),
-        (NORMAL_USER, NORMAL_USER),
-        (DELIVERY_PERSON, DELIVERY_PERSON)
+        (AUCTIONEER,  AUCTIONEER),
+        (BIDDER, BIDDER)
     )
 
     email = models.EmailField(unique=True)
-    role = models.CharField(max_length=50, choices=(('admin', 'Admin'), ('user', 'User')), default='user')
+    password = models.CharField(max_length=255)
+    role = models.CharField(max_length=50, choices=USER_ROLES, default=BIDDER)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,6 +61,7 @@ class Product(BaseModel):
     bidding_ending_date = models.DateField(default=timezone.now)
     bidding_ending_time = models.TimeField(default=timezone.now)
     seller = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="seller")
+    is_sold = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"{self.name} {self.seller.email}"
@@ -80,3 +80,8 @@ class Bidding(BaseModel):
 
 class BiddingWinner(BaseModel):
     bidding = models.ForeignKey(Bidding, on_delete=models.CASCADE)
+    final_price = models.PositiveIntegerField()
+    winning_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Winner: {self.bidding.bidder.email} won {self.bidding.product.name}"
