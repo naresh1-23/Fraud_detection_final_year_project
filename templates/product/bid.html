@@ -23,7 +23,7 @@
             </ul>
         </nav>
     </header>
-    <div class="container"></div>
+    <div class="container">
         <!-- Main Product Section -->
         <div class="product-section">
             <img src="{% static 'images/image-url.jpg' %}" alt="Product Image" class="main-image">
@@ -35,34 +35,19 @@
                     XXXX XXX<br>
                     XXXXX XXXXXXXXXXXXXXXX.
                 </p>
-                <button class="bid-btn">Bid</button>
             </div>
         </div>
-
-        <!-- Other Products Section -->
-        <div class="other-products">
-            <div class="product">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Product Image" class="thumb-image">
-                <div class="product-info">
-                    <h3>Product: XX-XXX</h3>
-                    <p class="description">XXXX XXXX XXX<br>XXX XXXXXX XXXXX<br>XXXX XXX<br>XXXXX XXXXXXXXXXXXXXXX.</p>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Product Image" class="thumb-image">
-                <div class="product-info">
-                    <h3>Product: XX-XXX</h3>
-                    <p class="description">XXXX XXXX XXX<br>XXX XXXXXX XXXXX<br>XXXX XXX<br>XXXXX XXXXXXXXXXXXXXXX.</p>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Product Image" class="thumb-image">
-                <div class="product-info">
-                    <h3>Product: XX-XXX</h3>
-                    <p class="description">XXXX XXXX XXX<br>XXX XXXXXX XXXXX<br>XXXX XXX<br>XXXXX XXXXXXXXXXXXXXXX.</p>
-                </div>
+    
+        
+        <div class="bidding-section">
+            <input type="text" placeholder="Place Your Bidding Amount">
+            <div class="bidding-actions">
+                <button class="cancel-btn">Cancel</button>
+                <button class="confirm-btn">Bid</button>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+
