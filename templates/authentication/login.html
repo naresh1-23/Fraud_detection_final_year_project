@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
-    {% if message %}
+    {% if messages %}
+    {% for message in messages %}
     {% include "helper/msg.html" %}
+    {% endfor %}
     {% endif %}
     <header>
         <div class="logo">
@@ -26,10 +28,6 @@
                 {% csrf_token %}
                 <input name = "email" type="email" placeholder="Email" required>
                 <input name = "password" type="password" placeholder="Password" required>
-                <div class="remember-me">
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Remember me</label>
-                </div>
                 <button type="submit">Login</button>
                 <p>Don’t have an account? <a href="{% url 'register' %}">Register</a></p>
             </form>
