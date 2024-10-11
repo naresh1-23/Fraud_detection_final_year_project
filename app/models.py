@@ -60,6 +60,7 @@ class Product(BaseModel):
     starting_price = models.PositiveIntegerField()
     bidding_ending_date = models.DateField(default=timezone.now)
     bidding_ending_time = models.TimeField(default=timezone.now)
+    picture = models.FileField(upload_to='product/', null=True, blank=True)
     seller = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="seller")
     is_sold = models.BooleanField(default=False)
 
