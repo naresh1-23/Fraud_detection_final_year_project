@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from app.services.user_service import UserService
 
@@ -12,7 +13,9 @@ def user_login(request):
         status, message, obj = UserService().login_user(email, password)
         print(message)
         if status:
+            messages.success(request, message)
             return redirect('home')
+        messages.warning(request, message)
         return redirect('login')
     return render(request, 'authentication/login.html')
 
@@ -29,6 +32,8 @@ def register(request):
         status, message, obj = UserService().register_user(email, password, confirm_password, role)
         print(message)
         if status:
+            messages.success(request, message)
             return redirect('login')
+        messages.warning(request, message)
         return redirect('register')
     return render(request, 'authentication/register.html')

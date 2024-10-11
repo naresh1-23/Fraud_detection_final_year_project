@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{% static 'register.css' %}">
 </head>
 <body>
+    {% if messages %}
+    {% for message in messages %}
+    {% include "helper/msg.html" %}
+    {% endfor %}
+    {% endif %}
     <header>
         <div class="logo">
             <img src="{% static 'images/logo.png' %}" alt="Smart Auction Logo">
