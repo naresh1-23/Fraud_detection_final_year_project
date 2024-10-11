@@ -90,11 +90,13 @@ aside {
 
 /* Form Section */
 .form-section {
+    margin-left: 10%;
     flex: 1;
     padding: 40px;
 }
 
 form {
+    width: 1000px;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -107,12 +109,13 @@ form label {
     font-weight: bold;
 }
 
-form input[type="text"], form input[type="file"], form select, form textarea {
-    width: 100%;
+form input[type="text"], form input[type="file"], form select, form textarea, form input[type="integer"] {
+    width: 95%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 form textarea {
@@ -121,22 +124,12 @@ form textarea {
 }
 
 /* Form Actions */
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-}
 
 button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-button.discard {
-    background-color: #b85c5c;
-    color: white;
-    margin-right: 10px;
 }
 
 button.continue {

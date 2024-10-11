@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from app.services.user_service import UserService
@@ -13,6 +14,7 @@ def user_login(request):
         status, message, obj = UserService().login_user(email, password)
         print(message)
         if status:
+            login(request, obj)
             messages.success(request, message)
             return redirect('home')
         messages.warning(request, message)
