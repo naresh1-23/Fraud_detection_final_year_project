@@ -29,86 +29,13 @@
         </nav>
     </header>
     <div class="grid-container">
+        {% for product in products %}
         <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
+            <img src="{{ product.picture.url }}" alt="Plain White T-shirt">
+            <p>{{product.name}}</p>
+            <a href="{% url 'bid' product.id %}"><button>Bid</button></a>
         </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
+        {% endfor %}
     </div>
     
     

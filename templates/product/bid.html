@@ -31,26 +31,23 @@
     <div class="container">
         <!-- Main Product Section -->
         <div class="product-section">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Product Image" class="main-image">
+            <img src="{{product.picture.url}}" alt="Product Image" class="main-image">
             <div class="product-info">
-                <h2>Product: XX-XXX</h2>
+                <h2>Product: {{product.name}}</h2>
                 <p class="description">
-                    XXXX XXXX XXX<br>
-                    XXX XXXXXX XXXXX<br>
-                    XXXX XXX<br>
-                    XXXXX XXXXXXXXXXXXXXXX.
+                    {{product.description}}
                 </p>
+                <div class="bidding-section">
+                    <h4>Start bidding</h4>
+                    <input type="integer" min="{{product.starting_price}}" value="{{product.starting_price}}" placeholder="Place Your Bidding Amount">
+                    <div class="bidding-actions">
+                        <button class="confirm-btn">Bid</button>
+                    </div>
+                </div>
             </div>
         </div>
     
         
-        <div class="bidding-section">
-            <input type="text" placeholder="Place Your Bidding Amount">
-            <div class="bidding-actions">
-                <button class="cancel-btn">Cancel</button>
-                <button class="confirm-btn">Bid</button>
-            </div>
-        </div>
     </div>
 </body>
 </html>
