@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from app.services.user_service import UserService
@@ -39,3 +39,12 @@ def register(request):
         messages.warning(request, message)
         return redirect('register')
     return render(request, 'authentication/register.html')
+
+
+def user_logout(request):
+    user = request.user
+    if user.is_authenticated:
+        logout(request)
+        messages.success(request, "Logged out successfully")
+        return redirect('login')
+    return redirect("login")
