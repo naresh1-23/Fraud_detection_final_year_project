@@ -70,8 +70,6 @@ class Product(BaseModel):
 
 class Bidding(BaseModel):
     price = models.PositiveIntegerField()
-    location = models.CharField(max_length=255)
-    contact_no = models.CharField(max_length=10, null=True, blank=True)
     bidder = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="bidder")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product")
 
