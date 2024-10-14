@@ -1,5 +1,7 @@
 from datetime import datetime
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from app.models import Bidding
 from app.services.product_service import ProductService
 
 
@@ -17,4 +19,15 @@ def bid(request, pk):
     data = {
         "product": product
     }
+    if request.method == "POST":
+        price = request.POST.get('bid_price')
+        if int(price) < int(product.starting_price):
+            messages.warning(request, "Invalid Price")
+            return render(request, 'product/bid.html', data)
+        product.starting_price = price
+        product.save()
+        bid = Bidding.objects.create(price=int(price), bidder=request.user, product=product)
+        bid.save()
+        messages.success(request, "Successfully bid added")
+        return render(request, 'product/bid.html', data)
     return render(request, 'product/bid.html', data)
