@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bidder bids</title>
+    <link rel="stylesheet" href="{% static 'bidder_bids.css' %}">
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+    {% include "helper/msg.html" %}
+    {% endfor %}
+    {% endif %}
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Auction Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <aside>
+            <div class="profile">
+                <img src="{% static 'images/profile.png' %}" alt="Profile Image">
+                <p>Naresh Tamang</p>
+                <a href="#">Edit Profile</a>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#">Bids</a></li>
+                <li><a href="#">Bids Won</a></li>
+            </ul>
+        </aside>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
+                <p>Plain White T-shirt</p>
+                <button class="status in-auction">Bid</button>
+                <p>Start Date: 2024/5/15</p>
+                <p>End Date: 2024/5/15</p>
+                <p>Price: 1500</p>
+            </div>
+            <div class="grid-item">
+                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
+                <p>Plain White T-shirt</p>
+                <button class="status in-auction">Bid</button>
+                <p>Start Date: 2024/5/15</p>
+                <p>End Date: 2024/5/15</p>
+                <p>Price: 1500</p>
+            </div>
+            <div class="grid-item">
+                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
+                <p>Plain White T-shirt</p>
+                <button class="status in-auction">Bid</button>
+                <p>Start Date: 2024/5/15</p>
+                <p>End Date: 2024/5/15</p>
+                <p>Price: 1500</p>
+            </div>
+            <div class="grid-item">
+                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
+                <p>Plain White T-shirt</p>
+                <button class="status in-auction">Bid</button>
+                <p>Start Date: 2024/5/15</p>
+                <p>End Date: 2024/5/15</p>
+                <p>Price: 1500</p>
+            </div>
+            <div class="grid-item">
+                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
+                <p>Plain White T-shirt</p>
+                <button class="status in-auction">Bid</button>
+                <p>Start Date: 2024/5/15</p>
+                <p>End Date: 2024/5/15</p>
+                <p>Price: 1500</p>
+            </div>
+            <div class="grid-item">
+                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
+                <p>Plain White T-shirt</p>
+                <button class="status in-auction">Bid</button>
+                <p>Start Date: 2024/5/15</p>
+                <p>End Date: 2024/5/15</p>
+                <p>Price: 1500</p>
+            </div>
+            
+        </div>    
+    </div>
+</body>
+</html>
