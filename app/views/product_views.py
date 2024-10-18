@@ -10,7 +10,6 @@ def home(request):
     data = {
         "products": products
     }
-    print(products[0].picture)
     return render(request, 'product/home.html', data)
 
 

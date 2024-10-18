@@ -12,5 +12,7 @@ urlpatterns = [
     path('bid/<int:pk>/', product_views.bid, name='bid'),
     path('logout/', user_views.user_logout, name='logout'),
     path('data_listing/', prakash_views.data_listing, name='data listing'),
-    path('win/', prakash_views.win, name='won')
+    path('win/', prakash_views.win, name='won'),
+    path('edit_profile/', prakash_views.edit_profile, name='edit profile'),
+    path('bidder_edit_profile/', prakash_views.bidder_edit_profile, name='bidder edit profile')
 ]
