@@ -14,5 +14,8 @@ urlpatterns = [
     path('data_listing/', prakash_views.data_listing, name='data listing'),
     path('win/', prakash_views.win, name='won'),
     path('edit_profile/', prakash_views.edit_profile, name='edit profile'),
-    path('bidder_edit_profile/', prakash_views.bidder_edit_profile, name='bidder edit profile')
+    path('bidder_edit_profile/', prakash_views.bidder_edit_profile, name='bidder edit profile'),
+    path('your_product/', prakash_views.your_product, name='your product'),
+    path('bidder_bids/', prakash_views.bidder_bids, name='bidder bids'),
+    path('bids_won/', prakash_views.bids_won, name='bids won')
 ]
