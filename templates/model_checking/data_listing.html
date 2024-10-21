@@ -4,10 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auction System - Explore</title>
-    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <title>data listing</title>
+    <link rel="stylesheet" href="{% static 'data_listing.css' %}">
 </head>
 <body>
+    {% if messages %}
+    {% for message in messages %}
+    {% include "helper/msg.html" %}
+    {% endfor %}
+    {% endif %}
     <header>
         <div class="logo">
             <img src="{% static 'images/logo.png' %}" alt="Auction Logo">
@@ -17,95 +22,48 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
     </header>
-    <div class="grid-container">
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>EbayID</th>
+                        <th>QuantitySold</th>
+                        <th>Price</th>
+                        <th>PricePercent</th>
+                        <th>StartingBidPercent</th>
+                        <th>SellerName</th>
+                        <th>SellerClosePercent</th>
+                        <th>Category</th>
+                        <th>PersonId</th>
+                        <th>StartingBid</th>
+                        <th>AvgPrice</th>
+                        <th>EndDay</th>
+                        <th>HitCount</th>
+                        <th>AuctionAvgHitCount</th>
+                        <th>ItemAuctionSellPercent</th>
+                        <th>SellerSaleAvgPriceRatio</th>
+                        <th>SellerAvg</th>
+                        <th>SellerItemAvg</th>
+                        <th>AuctionHitCountAvgRatio</th>
+                        <th>BestOffer</th>
+                        <th>ReturnsAccepted</th>
+                        <th>IsHOF</th>
+                        <th>ItemListedCount</th>
+                        <th>AuctionCount</th>
+                        <th>AuctionSaleCount</th>
+                        <th>SellerAuctionCount</th>
+                        <th>SellerAuctionSaleCount</th>
+                        <th>AuctionMedianPrice</th>
+                    </tr>
+                </thead>
+                <tbody>
+            </table>
         </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-        <div class="grid-item">
-            <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-            <p>Plain White T-shirt</p>
-            <button>Bid</button>
-        </div>
-    </div>
-    
-    
 </body>
 </html>
