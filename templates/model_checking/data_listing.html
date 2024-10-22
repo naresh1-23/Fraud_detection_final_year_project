@@ -32,38 +32,41 @@
             <table>
                 <thead>
                     <tr>
-                        <th>EbayID</th>
-                        <th>QuantitySold</th>
-                        <th>Price</th>
-                        <th>PricePercent</th>
-                        <th>StartingBidPercent</th>
-                        <th>SellerName</th>
-                        <th>SellerClosePercent</th>
-                        <th>Category</th>
-                        <th>PersonId</th>
-                        <th>StartingBid</th>
-                        <th>AvgPrice</th>
-                        <th>EndDay</th>
-                        <th>HitCount</th>
-                        <th>AuctionAvgHitCount</th>
-                        <th>ItemAuctionSellPercent</th>
-                        <th>SellerSaleAvgPriceRatio</th>
-                        <th>SellerAvg</th>
-                        <th>SellerItemAvg</th>
-                        <th>AuctionHitCountAvgRatio</th>
-                        <th>BestOffer</th>
-                        <th>ReturnsAccepted</th>
-                        <th>IsHOF</th>
-                        <th>ItemListedCount</th>
-                        <th>AuctionCount</th>
-                        <th>AuctionSaleCount</th>
-                        <th>SellerAuctionCount</th>
-                        <th>SellerAuctionSaleCount</th>
-                        <th>AuctionMedianPrice</th>
+                        <!-- Assuming there's at least one row, use the first row to display the headings -->
+                        {% if page_obj %}
+                            {% for key in page_obj.0.keys %}
+                                <th>{{ key }}</th>
+                            {% endfor %}
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
+                    {% for row in page_obj %}
+                        <tr>
+                            {% for value in row.values %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
+        </div>
+        <div>
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
         </div>
 </body>
 </html>
