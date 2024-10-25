@@ -1,4 +1,4 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from app.services.user_service import UserService
@@ -48,3 +48,34 @@ def user_logout(request):
         messages.success(request, "Logged out successfully")
         return redirect('login')
     return redirect("login")
+
+
+def profile(request):
+    user = request.user
+    if request.method == "POST":
+        email = request.POST.get('email')
+        confirm_email = request.POST.get('confirm_email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        if not email and not password:
+            messages.error(request, "Either email or password is required")
+            return redirect('profile')
+        if email:
+            if email != confirm_email:
+                messages.error(request, "Email didn't matched")
+                return redirect('profile')
+            another_user = UserService().get_user(email=email)
+            if another_user:
+                messages.error(request, "Email already exists")
+                return redirect('profile')
+            user.email = email
+        if password:
+            if password != confirm_password:
+                messages.error(request, "Password didn't matched")
+                return redirect('profile')
+            user.set_password(password)  # Use set_password method
+            update_session_auth_hash(request, user)
+        user.save()
+        messages.success(request, "Profile successfully edited")
+        return redirect('profile')
+    return render(request, 'authentication/edit_profile.html', {"user": user})
