@@ -23,7 +23,7 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
@@ -33,70 +33,29 @@
             <div class="profile">
                 <img src="{% static 'images/profile.png' %}" alt="Profile Image">
                 <p>Naresh Tamang</p>
-                <a href="#">Edit Profile</a>
+                <a href="{% url 'profile' %}">Edit Profile</a>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#">Your Products</a></li>
-                <li><a href="#">Add Products</a></li>
+                <li><a href="{% url 'your product' %}">Your Products</a></li>
+                <li><a href="{% url 'add product' %}">Add Products</a></li>
             </ul>
         </aside>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status in-auction">In Auction</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
+        <div class="grid-container" style="margin-top: 100px;">
+            {% for product in products %}
+            <div class="grid-item" style="height: 500px; width: 400px;">
+                <img src="{{ product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
+                <p>{{product.name}}</p>
+                {% if product.is_sold %}
+                <div class="status in-auction">Sold</div>
+                {% else %}
+                <div class="status in-auction">Not Sold</div>
+                {% endif %}                
+                <p>Start Date: {{ product.created_date }}</p>
+                <p>End Date: {{ product.bidding_ending_date }}</p>
+                <p>End Time: {{ product.bidding_ending_time }}</p>
+                <p>Price: {{product.starting_price}}</p>
             </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status in-auction">In Auction</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status in-auction">In Auction</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status in-auction">In Auction</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status sold">Sold</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status sold">Sold</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <div class="status sold">Sold</div>
-                <p>Start Date: 2024/5/15</p>
-                <p>End Date: 2024/5/15</p>
-                <p>Price: 1500</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </body>

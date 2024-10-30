@@ -14,8 +14,8 @@ urlpatterns = [
     path('logout/', user_views.user_logout, name='logout'),
     path('data_listing/', dataset_views.data_listing, name='data listing'),
     path('win/', prakash_views.win, name='won'),
-    path('edit_profile/', user_views.profile, name='profile'),
-    path('your_product/', prakash_views.your_product, name='your product'),
+    path('profile/', user_views.profile, name='profile'),
+    path('your_product/', seller_views.your_product, name='your product'),
     path('bidder_bids/', prakash_views.bidder_bids, name='bidder bids'),
     path('bids_won/', prakash_views.bids_won, name='bids won')
 ]

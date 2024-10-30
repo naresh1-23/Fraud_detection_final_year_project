@@ -23,17 +23,21 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
     </header>
     <div class="grid-container">
         {% for product in products %}
-        <div class="grid-item">
-            <img src="{{ product.picture.url }}" alt="Plain White T-shirt">
+        <div class="grid-item" style="height: 500px; width: 400px;">
+            <img src="{{ product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
             <p>{{product.name}}</p>
             <a href="{% url 'bid' product.id %}"><button>Bid</button></a>
+            <p>Start Date: {{ product.created_date }}</p>
+            <p>End Date: {{ product.bidding_ending_date }}</p>
+            <p>End Time: {{ product.bidding_ending_time }}</p>
+            <p>Price: 1500</p>
         </div>
         {% endfor %}
     </div>
