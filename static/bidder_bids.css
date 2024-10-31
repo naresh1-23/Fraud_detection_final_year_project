@@ -89,11 +89,16 @@ nav ul li a {
 }
 
 aside {
-    width: 300px;
     background-color: #f0f0f0;
-    padding: 20px;
-    margin-top: 90px;
+    position: fixed;
+    padding-top: 50px;
+    top: 75px;
+    left: 0;
+    width: 300px; /* Set a width for the sidebar */
+    height: 100vh;
 }
+
+
 
 .profile {
     text-align: center;

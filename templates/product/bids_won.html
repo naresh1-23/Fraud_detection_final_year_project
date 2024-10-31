@@ -13,64 +13,31 @@
     {% include "helper/msg.html" %}
     {% endfor %}
     {% endif %}
-    <header>
+    <header style="height: 50px;">
         <div class="logo">
             <img src="{% static 'images/logo.png' %}" alt="Auction Logo">
         </div>
         <div class="search-bar">
-            <input type="text" placeholder="Search">
         </div>
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'bidders bid' %}">Bids</a></li>
+                <li><a href="{% url 'bids won' %}">Bids Won</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
     </header>
     <div class="container">
-        <aside>
-            <div class="profile">
-                <img src="{% static 'images/profile.png' %}" alt="Profile Image">
-                <p>Naresh Tamang</p>
-                <a href="{% url 'profile' %}">Edit Profile</a>
-            </div>
-            <ul class="sidebar-menu">
-                <li><a href="#">Bids</a></li>
-                <li><a href="#">Bids Won</a></li>
-            </ul>
-        </aside>
         <div class="grid-container">
+            {% for bid in bids %}
             <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <p>Price: 1500</p>
+                <img src="{{ bid.bidding.product.picture.url }}" alt="Plain White T-shirt">
+                <p>{{bid.bidding.product.name}}</p>
+                <p>Price: {{bid.bidding.product.starting_price}}</p>
             </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <p>Price: 1500</p>
-            </div>
-            <div class="grid-item">
-                <img src="{% static 'images/image-url.jpg' %}" alt="Plain White T-shirt">
-                <p>Plain White T-shirt</p>
-                <p>Price: 1500</p>
-            </div> 
+            {% endfor %}
         </div>    
     </div>
 </body>

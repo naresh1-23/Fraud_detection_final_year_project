@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit profile</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" href="{% static 'edit_profile.css' %}">
 </head>
 <body>
@@ -17,55 +17,48 @@
         <div class="logo">
             <img src="{% static 'images/logo.png' %}" alt="Auction Logo">
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search">
-        </div>
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
+                {% if user.role == "Bidder" %}
+                <li><a href="{% url 'bidders bid' %}">Bids</a></li>
+                <li><a href="{% url 'bids won' %}">Bids Won</a></li>
+                {% else %}
+                <li><a href="{% url 'your product' %}">Your Products</a></li>
+                <li><a href="{% url 'add product' %}">Add Products</a></li>
+                {% endif %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <h2>Profile Information</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Role:</strong> {{ user.role }}</p>
+    </section>
     <div class="container">
-        <!-- Sidebar -->
-        <aside>
-            <div class="profile">
-                <img src="{% static 'images/profile.png' %}" alt="Profile Image">
-                <p>{{user.email}}</p>
-                <a href="{% url 'profile' %}">Edit Profile</a>
-            </div>
-            {% if user.role == "Bidder" %}
-            <ul class="sidebar-menu">
-                <li><a href="#">Bids</a></li>
-                <li><a href="#">Bids Won</a></li>
-            </ul>
-            {% else %}
-            <ul class="sidebar-menu">
-                <li><a href="{% url 'your product' %}">Your Products</a></li>
-                <li><a href="{% url 'add product' %}">Add Products</a></li>
-            </ul>
-            {% endif %}
-        </aside>
+        
 
         <!-- Form Section -->
         <section class="form-section">
+            <h2>Edit Profile</h2>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 
                 <label for="email">Change Email</label>
-                <input placeholder="{{user.email}}" type="email" id="email" name="email">
+                <input placeholder="{{ user.email }}" type="email" id="email" name="email">
 
-                <label for="email">Confirm Email</label>
-                <input type="email" id="email" name="confirm_email">
+                <label for="confirm_email">Confirm Email</label>
+                <input type="email" id="confirm_email" name="confirm_email">
 
                 <label for="password">Change Password</label>
                 <input type="password" id="password" name="password">
 
-                <label for="password">Confirm Password</label>
-                <input type="password" id="password" name="confirm_password">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password">
 
                 <div class="form-actions">
                     <button type="submit" class="continue">Save</button>
