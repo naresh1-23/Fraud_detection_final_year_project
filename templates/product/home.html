@@ -18,22 +18,37 @@
             <img src="{% static 'images/logo.png' %}" alt="Auction Logo">
         </div>
         <div class="search-bar">
-            <input type="text" placeholder="Search">
+            <form method="POST">
+                {% csrf_token %}
+            <input name = "search" type="text" placeholder="Search">
+            <button style="height: 40px; margin-left: 5px; width: 100px; font-size: 15px; border: none; border-radius: 15px; background-color: #da8e43; color: rgb(0, 0, 0);" type="submit" class="search">Search</button>
+            </form>
         </div>
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                {% if user.role == "Bidder" %}
+                <li><a href="{% url 'bidders bid' %}">Bids</a></li>
+                <li><a href="{% url 'bids won' %}">Bids Won</a></li>
+                {% else %}
+                <li><a href="{% url 'your product' %}">Your Products</a></li>
+                <li><a href="{% url 'add product' %}">Add Products</a></li>
+                {% endif %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
     </header>
     <div class="grid-container">
         {% for product in products %}
-        <div class="grid-item">
-            <img src="{{ product.picture.url }}" alt="Plain White T-shirt">
+        <div class="grid-item" style="height: 500px; width: 400px;">
+            <img src="{{ product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
             <p>{{product.name}}</p>
             <a href="{% url 'bid' product.id %}"><button>Bid</button></a>
+            <p>Start Date: {{ product.created_at|date:"M. j, Y" }}</p>
+            <p>End Date: {{ product.bidding_ending_date }}</p>
+            <p>End Time: {{ product.bidding_ending_time }}</p>
+            <p>Price: {{product.starting_price}}</p>
         </div>
         {% endfor %}
     </div>

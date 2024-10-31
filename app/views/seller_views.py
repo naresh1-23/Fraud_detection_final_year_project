@@ -25,3 +25,15 @@ def add_product(request):
         messages.warning(request, message)
         return redirect('add product')
     return render(request, 'seller/add_product.html')
+
+
+def your_product(request):
+    user = request.user
+    if not user.is_authenticated:
+        messages.warning(request, "Login first")
+        return redirect('login')
+    if user.role != "Auctioneer":
+        messages.warning(request, "Access denied!")
+        return redirect('home')
+    products = ProductService().filter_product(seller=user)
+    return render(request, "product/your_product.html", {"products": products})
