@@ -36,9 +36,9 @@
                 <img src="{{ product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
                 <p>{{product.name}}</p>
                 {% if product.is_sold %}
-                <div class="status in-auction">Sold</div>
+                <div class="status in-auction">Already Sold</div>
                 {% else %}
-                <div class="status in-auction">Not Sold</div>
+                <a href="{% url 'sold_product' product.id %}"><button>Sold</button></a>
                 {% endif %}                
                 <p>Start Date: {{ product.created_at|date:"M. j, Y" }}</p>
                 <p>End Date: {{ product.bidding_ending_date }}</p>

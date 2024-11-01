@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from app.models import UserStatistics
 from app.services.product_service import ProductService
 
 
@@ -20,6 +21,7 @@ def add_product(request):
         end_time = request.POST.get("time")
         status, message, obj = ProductService().add_product(title, description, start_price, end_date, end_time, picture, user)
         if status:
+            ProductService().update_user_stats_item_listed(user)
             messages.success(request, message)
             return redirect('home')
         messages.warning(request, message)
@@ -37,3 +39,15 @@ def your_product(request):
         return redirect('home')
     products = ProductService().filter_product(seller=user)
     return render(request, "product/your_product.html", {"products": products})
+
+
+def sold_product(request, product_id):
+    user = request.user
+    product = ProductService().get_product(id=product_id)
+    user_stats = UserStatistics.objects.filter(user=user).first()
+    user_stats.total_item_sold += 1
+    user_stats.save()
+    product.is_sold = True
+    product.save()
+    messages.success(request, "Sold Item")
+    return redirect('your product')

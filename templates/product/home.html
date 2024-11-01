@@ -41,17 +41,20 @@
     </header>
     <div class="grid-container">
         {% for product in products %}
-        <div class="grid-item" style="height: 500px; width: 400px;">
-            <img src="{{ product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
-            <p>{{product.name}}</p>
-            <a href="{% url 'bid' product.id %}"><button>Bid</button></a>
-            <p>Start Date: {{ product.created_at|date:"M. j, Y" }}</p>
-            <p>End Date: {{ product.bidding_ending_date }}</p>
-            <p>End Time: {{ product.bidding_ending_time }}</p>
-            <p>Price: {{product.starting_price}}</p>
+        <div class="grid-item" style="height: 550px; width: 400px;">
+            <div class="fraud-status">{{product.fraud}}</div>
+            <img src="{{ product.product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
+            <p><b>Name:</b> {{product.product.name}}</p>
+            <p><b>Start Date:</b> {{ product.product.created_at|date:"M. j, Y" }}</p>
+            <p><b>End Date:</b> {{ product.product.bidding_ending_date }}</p>
+            <p><b>End Time:</b> {{ product.product.bidding_ending_time }}</p>
+            <p><b>Price:</b> {{product.product.starting_price}}</p>
+            <a href="{% url 'bid' product.product.id %}" style="text-decoration: none;"><button style="width: 200px;">Bid</button></a>
         </div>
         {% endfor %}
     </div>
+
+    
     
     
 </body>

@@ -121,11 +121,7 @@ body {
     border-radius: 8px;
 }
 
-.grid-item p {
-    margin: 10px 0;
-    font-size: 16px;
-    font-weight: bold;
-}
+
 
 .grid-item button {
     background-color: #d4a373;
@@ -140,4 +136,64 @@ body {
 
 .grid-item button:hover {
     background-color: #b68d56;
+}
+
+
+
+
+/* Product name */
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Styling for paragraphs */
+.grid-item p {
+    text-align: left;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Button styling */
+.grid-item button {
+    width: 100%;
+    background: linear-gradient(135deg, #d4a373, #b68d56);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-item button:hover {
+    background: linear-gradient(135deg, #b68d56, #a0743d);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.grid-item button:active {
+    background: linear-gradient(135deg, #a0743d, #8c5f2e);
+    transform: translateY(1px);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Fraud status box styling */
+.fraud-status {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff4d4d;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
