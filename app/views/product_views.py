@@ -1,18 +1,34 @@
 from datetime import datetime
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from app.models import Bidding, BiddingWinner
+import pytz
+from app.apps import AppConfig
+from app.models import Bidding, BiddingWinner, UserStatistics
 from app.services.product_service import ProductService
 
 
 def home(request):
+    ProductService().assign_winner()
+    time_zone = pytz.timezone("Asia/Kathmandu")
     if request.method == "POST":
         search = request.POST.get('search', "")
-        products = ProductService().filter_product(bidding_ending_date__gte=datetime.now(), name__icontains=search)
+        products = ProductService().filter_product(
+            bidding_ending_date__gte=datetime.now(time_zone),
+            name__icontains=search).exclude(
+            bidding_ending_date=datetime.now(time_zone).date(),
+            bidding_ending_time__lte=datetime.now(time_zone).time())
     else:
-        products = ProductService().filter_product(bidding_ending_date__gte=datetime.now())
+        products = ProductService().filter_product(bidding_ending_date__gte=datetime.now(time_zone)).exclude(
+            bidding_ending_date=datetime.now(time_zone).date(), bidding_ending_time__lte=datetime.now(time_zone).time())
+    new_products = []
+    for product in products:
+        temp = {}
+        temp["product"] = product
+        user = product.seller
+        temp["fraud"] = ProductService().predict_fraud(user)
+        new_products.append(temp)
     data = {
-        "products": products
+        "products": new_products
     }
 
     return render(request, 'product/home.html', data)
@@ -39,15 +55,16 @@ def bid(request, pk):
 
 def bidder_bids(request):
     user = request.user
+    time_zone = pytz.timezone("Asia/Kathmandu")
     bids = Bidding.objects.filter(bidder=user)
     total_bids = []
     if bids:
         for bid in bids:
             temp = {}
-            if bid.product.bidding_ending_date > datetime.now().date():
+            if bid.product.bidding_ending_date > datetime.now(time_zone).date():
                 status = "Pending"
-            elif bid.product.bidding_ending_date == datetime.now().date():
-                if bid.product.bidding_ending_time < datetime.now().time():
+            elif bid.product.bidding_ending_date == datetime.now(time_zone).date():
+                if bid.product.bidding_ending_time < datetime.now(time_zone).time():
                     result = BiddingWinner.objects.filter(bidding=bid).first()
                     if result:
                         status = "Won"
@@ -65,8 +82,6 @@ def bidder_bids(request):
             temp["bid"] = bid
             temp["status"] = status
             total_bids.append(temp)
-    print(bids)
-    print(total_bids[0]["bid"])
     return render(request, "product/bidder_bids.html", {"bids": total_bids})
 
 

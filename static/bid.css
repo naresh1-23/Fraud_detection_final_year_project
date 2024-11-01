@@ -99,7 +99,7 @@ body {
 
 
 
-/* Main Product Section */
+/* Main Product Section
 .product-section {
     display: flex;
     align-items: flex-start;
@@ -199,4 +199,92 @@ body {
 
 .confirm-btn:hover {
     background-color: #6f482d;
+} */
+ 
+
+/* Overall Container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Product Display Section */
+.product-display {
+    margin-bottom: 20px;
+}
+
+.product-image {
+    width: 800px; /* Fixed width */
+    height: 500px; /* Fixed height */
+    object-fit: cover; /* Ensures the image fills the area without distortion */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.product-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Bidding Section */
+.bidding-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.bidding-section label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.bidding-section input[name="bid_price"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Enhanced Bid Button */
+.bid-button {
+    width: 100%;
+    background: linear-gradient(135deg, #d4a373, #b68d56);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bid-button:hover {
+    background: linear-gradient(135deg, #b68d56, #a0743d);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.bid-button:active {
+    background: linear-gradient(135deg, #a0743d, #8c5f2e);
+    transform: translateY(1px);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }

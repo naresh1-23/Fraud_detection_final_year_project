@@ -63,6 +63,7 @@ class Product(BaseModel):
     picture = models.FileField(upload_to='product/', null=True, blank=True)
     seller = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="seller")
     is_sold = models.BooleanField(default=False)
+    assigned_winner = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"{self.name} {self.seller.email}"
@@ -80,7 +81,16 @@ class Bidding(BaseModel):
 class BiddingWinner(BaseModel):
     bidding = models.ForeignKey(Bidding, on_delete=models.CASCADE)
     final_price = models.PositiveIntegerField()
-    winning_date = models.DateTimeField(default=timezone.now)
+    winning_date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return f"Winner: {self.bidding.bidder.email} won {self.bidding.product.name}"
+
+
+class UserStatistics(BaseModel):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="statistics")
+    total_item_listed = models.PositiveIntegerField(default=0)
+    total_item_sold = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user.email} - Listed: {self.total_item_listed}, Sold: {self.total_item_sold}"

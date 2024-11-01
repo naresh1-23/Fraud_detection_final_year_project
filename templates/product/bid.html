@@ -26,31 +26,25 @@
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </nav>
-    </header>
+    </header>   
     <div class="container">
-        <!-- Main Product Section -->
-        <div class="product-section">
-            <img src="{{product.picture.url}}" alt="Product Image" class="main-image">
-            <div class="product-info">
-                <h2>Product: {{product.name}}</h2>
-                <p class="description">
-                    {{product.description}}
-                </p>
-                <div class="bidding-section">
-                    <h4>Start bidding</h4>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                    <input name = "bid_price" type="integer" min="{{product.starting_price}}" value="{{product.starting_price}}" placeholder="Place Your Bidding Amount">
-                    <div class="bidding-actions">
-                        <button type="submit" class="confirm-btn">Bid</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
+        <!-- Product Display Section -->
+        <div class="product-display">
+            <img src="{{product.picture.url}}" alt="Product Image" class="product-image" height="600px" width="700px">
+            <h2 class="product-name">{{product.name}}</h2>
         </div>
-    
         
+        <!-- Bidding Section -->
+        <div class="bidding-section">
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="bid_price">Place Your Bid:</label>
+                <input name="bid_price" type="number" min="{{product.starting_price}}" value="{{product.starting_price}}" placeholder="Enter bidding amount" required>
+                <button type="submit" class="bid-button">Bid</button>
+            </form>
+        </div>
     </div>
+    
 </body>
 </html>
 

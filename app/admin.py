@@ -1,5 +1,6 @@
+from .models import UserStatistics
 from django.contrib import admin
-from .models import CustomUser, Product, Bidding, BiddingWinner
+from .models import CustomUser, Product, Bidding, BiddingWinner, UserStatistics
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -61,3 +62,16 @@ class BiddingWinnerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(BiddingWinner, BiddingWinnerAdmin)
+
+
+@admin.register(UserStatistics)
+class UserStatisticsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'total_item_listed', 'total_item_sold')
+    search_fields = ('user__email',)
+    list_filter = ('total_item_listed', 'total_item_sold')
+    ordering = ('user',)
+
+    # This method makes it easier to display the user email directly in the admin
+    def user_email(self, obj):
+        return obj.user.email
+    user_email.short_description = 'User Email'

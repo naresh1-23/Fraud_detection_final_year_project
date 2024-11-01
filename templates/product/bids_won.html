@@ -30,13 +30,16 @@
         </nav>
     </header>
     <div class="container">
-        <div class="grid-container">
+        <div class="grid-container" style="margin-top: 100px;">
             {% for bid in bids %}
-            <div class="grid-item">
-                <img src="{{ bid.bidding.product.picture.url }}" alt="Plain White T-shirt">
+            <div class="grid-item" style="height: 500px; width: 400px;">
+                <img src="{{ bid.bidding.product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
                 <p>{{bid.bidding.product.name}}</p>
+                <p>Start Date: {{ bid.bidding.product.created_at|date:"M. j, Y" }}</p>
+                <p>End Date: {{ bid.bidding.product.bidding_ending_date }}</p>
+                <p>End Time: {{ bid.bidding.product.bidding_ending_time }}</p>
                 <p>Price: {{bid.bidding.product.starting_price}}</p>
-            </div>
+            </div>          
             {% endfor %}
         </div>    
     </div>
