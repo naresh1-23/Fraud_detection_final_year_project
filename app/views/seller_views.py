@@ -42,12 +42,12 @@ def your_product(request):
 
 
 def sold_product(request, product_id):
-    user = request.user
     product = ProductService().get_product(id=product_id)
+    user = product.seller
     user_stats = UserStatistics.objects.filter(user=user).first()
     user_stats.total_item_sold += 1
     user_stats.save()
     product.is_sold = True
     product.save()
     messages.success(request, "Sold Item")
-    return redirect('your product')
+    return redirect('bidders bid')

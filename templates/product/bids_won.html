@@ -39,6 +39,11 @@
                 <p>End Date: {{ bid.bidding.product.bidding_ending_date }}</p>
                 <p>End Time: {{ bid.bidding.product.bidding_ending_time }}</p>
                 <p>Price: {{bid.bidding.product.starting_price}}</p>
+                {% if bid.bidding.product.is_sold %}
+                <a href="#"><button class="status in-auction">Delivered</button></a>
+                {% else %}
+                <a href="{% url 'sold_product' bid.bidding.product.id %}"><button class="status sold">Received?</button></a>
+                {% endif %}    
             </div>          
             {% endfor %}
         </div>    

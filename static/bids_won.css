@@ -163,5 +163,38 @@ aside {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.in-auction {
+    background-color: #f0ad4e;
+}
+
+.sold {
+    background-color: #8b4513;
+}
+.grid-item button {
+    width: 100px;
+    background: linear-gradient(135deg, #d4a373, #b68d56);
+    color: #fff;
+    border: none;
+    padding: 5px, 10px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-item button:hover {
+    background: linear-gradient(135deg, #b68d56, #a0743d);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.grid-item button:active {
+    background: linear-gradient(135deg, #a0743d, #8c5f2e);
+    transform: translateY(1px);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
 
 
