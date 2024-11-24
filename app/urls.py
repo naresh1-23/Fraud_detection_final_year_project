@@ -17,5 +17,7 @@ urlpatterns = [
     path('your_product/', seller_views.your_product, name='your product'),
     path('bidder_bids/', product_views.bidder_bids, name='bidders bid'),
     path('bids_won/', product_views.bids_won, name='bids won'),
-    path('sold_product/<int:product_id>/', seller_views.sold_product, name='sold_product')
+    path('sold_product/<int:product_id>/', seller_views.sold_product, name='sold_product'),
+    path('returned/<int:product_id>/', seller_views.returned_product, name='returned_product'),
+    path('predict/', dataset_views.predict_model, name='predict model')
 ]

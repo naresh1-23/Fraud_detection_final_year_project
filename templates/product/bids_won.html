@@ -41,8 +41,11 @@
                 <p>Price: {{bid.bidding.product.starting_price}}</p>
                 {% if bid.bidding.product.is_sold %}
                 <a href="#"><button class="status in-auction">Delivered</button></a>
+                {% elif bid.bidding.product.is_returned %}
+                <a href="#"><button class="status in-auction">Returned</button></a>
                 {% else %}
-                <a href="{% url 'sold_product' bid.bidding.product.id %}"><button class="status sold">Received?</button></a>
+                <a href="{% url 'sold_product' bid.bidding.product.id %}"><button class="status sold">Received</button></a>
+                <a href="{% url 'returned_product' bid.bidding.product.id %}"><button class="status sold">Returned</button></a>
                 {% endif %}    
             </div>          
             {% endfor %}

@@ -8,30 +8,34 @@ from app.services.product_service import ProductService
 
 
 def home(request):
-    ProductService().assign_winner()
-    time_zone = pytz.timezone("Asia/Kathmandu")
-    if request.method == "POST":
-        search = request.POST.get('search', "")
-        products = ProductService().filter_product(
-            bidding_ending_date__gte=datetime.now(time_zone),
-            name__icontains=search).exclude(
-            bidding_ending_date=datetime.now(time_zone).date(),
-            bidding_ending_time__lte=datetime.now(time_zone).time())
-    else:
-        products = ProductService().filter_product(bidding_ending_date__gte=datetime.now(time_zone)).exclude(
-            bidding_ending_date=datetime.now(time_zone).date(), bidding_ending_time__lte=datetime.now(time_zone).time())
-    new_products = []
-    for product in products:
-        temp = {}
-        temp["product"] = product
-        user = product.seller
-        temp["fraud"] = ProductService().predict_fraud(user)
-        new_products.append(temp)
-    data = {
-        "products": new_products
-    }
+    if request.user.is_authenticated:
+        ProductService().assign_winner()
+        time_zone = pytz.timezone("Asia/Kathmandu")
+        if request.method == "POST":
+            search = request.POST.get('search', "")
+            products = ProductService().filter_product(
+                bidding_ending_date__gte=datetime.now(time_zone),
+                name__icontains=search).exclude(
+                bidding_ending_date=datetime.now(time_zone).date(),
+                bidding_ending_time__lte=datetime.now(time_zone).time())
+        else:
+            products = ProductService().filter_product(
+                bidding_ending_date__gte=datetime.now(time_zone)).exclude(
+                bidding_ending_date=datetime.now(time_zone).date(),
+                bidding_ending_time__lte=datetime.now(time_zone).time())
+        new_products = []
+        for product in products:
+            temp = {}
+            temp["product"] = product
+            user = product.seller
+            temp["fraud"] = ProductService().predict_fraud(user)
+            new_products.append(temp)
+        data = {
+            "products": new_products
+        }
 
-    return render(request, 'product/home.html', data)
+        return render(request, 'product/home.html', data)
+    return redirect('login')
 
 
 def bid(request, pk):

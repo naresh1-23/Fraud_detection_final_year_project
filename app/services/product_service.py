@@ -1,8 +1,11 @@
+import numpy as np
+import pandas as pd
 from datetime import datetime
 from django.db.models import Q
 import pytz
 from app.apps import AppConfig
 from app.models import Product, UserStatistics, Bidding, BiddingWinner
+from model.LogisticRegression import LogisticRegression
 
 
 class ProductService:
@@ -30,20 +33,29 @@ class ProductService:
     @staticmethod
     def update_user_stats_item_listed(user):
         user_stats = UserStatistics.objects.filter(user=user).first()
+        products = ProductService().filter_product(seller=user).values_list('starting_price', flat=True)
+        prices = {"prices": products}
+        df = pd.DataFrame(prices)
+        median_price = df["prices"].median()
         if not user_stats:
-            user_stats_create = UserStatistics.objects.create(user=user, total_item_listed=1, total_item_sold=0)
+            user_stats_create = UserStatistics.objects.create(
+                user=user, total_item_listed=1, total_item_sold=0, median_auction_price=median_price)
             user_stats_create.save()
             print("created user stats")
         else:
             user_stats.total_item_listed += 1
+            user_stats.median_auction_price = median_price
             user_stats.save()
             print("Updated user stats")
 
     @staticmethod
     def predict_fraud(user):
         user_stats = UserStatistics.objects.get(user=user)
-        model = AppConfig.model_instance
-        prediction = model.predict([[user_stats.total_item_listed, user_stats.total_item_sold]])
+        model = LogisticRegression(
+            weights=np.array([-0.01716929, -0.09296037, 0.02588775, 0.04282618]),
+            bias=-0.0031132521959794145)
+        prediction = model.predict([[user_stats.total_item_listed, user_stats.total_item_sold,
+                                   user_stats.median_auction_price, user_stats.total_item_returned]])
         print(prediction)
         print(user_stats.total_item_listed, user_stats.total_item_sold)
         return "Might be fraud" if prediction[0] == 1 else "This user is verified"

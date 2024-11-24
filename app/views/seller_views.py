@@ -51,3 +51,15 @@ def sold_product(request, product_id):
     product.save()
     messages.success(request, "Sold Item")
     return redirect('bidders bid')
+
+
+def returned_product(request, product_id):
+    product = ProductService().get_product(id=product_id)
+    user = product.seller
+    user_stats = UserStatistics.objects.filter(user=user).first()
+    user_stats.total_item_returned += 1
+    user_stats.save()
+    product.is_returned = True
+    product.save()
+    messages.success(request, "Returned Item")
+    return redirect('bidders bid')

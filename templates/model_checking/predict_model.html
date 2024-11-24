@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Warning Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f2a140, #d89b60);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fdd835;
+        }
+        .navbar a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #000;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .card .warning {
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 4px;
+        }
+        .card p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .card .bid-button {
+            background-color: #d4a56c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #d4a56c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                <input type="number" name = "item_listed" placeholder="Enter Total Item listed" required>
+                <input type="number" name = "sales_count" placeholder="Enter Total Item sold" required>
+                <input type="text" name = "median_price" placeholder="Enter median price" required>
+                <input type="number" name  = "return_count" placeholder="Enter total item returned" required>
+                <button type="submit">Submit</button>
+            </form>
+            {% if result %}
+            <h1>Prediction: {{result}}</h1>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

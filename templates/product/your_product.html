@@ -34,7 +34,12 @@
             {% for product in products %}
             <div class="grid-item" style="height: 500px; width: 400px;">
                 <img src="{{ product.picture.url }}" alt="Plain White T-shirt" style="height: 300px; width: 500px;">
-                <p>{{product.name}}</p>              
+                <p>{{product.name}}</p>
+                {% if product.is_sold %}
+                <div class="status in-auction">Sold</div>
+                {% else %}
+                <div class="status in-auction">Not Sold</div>
+                {% endif %}                
                 <p>Start Date: {{ product.created_at|date:"M. j, Y" }}</p>
                 <p>End Date: {{ product.bidding_ending_date }}</p>
                 <p>End Time: {{ product.bidding_ending_time }}</p>

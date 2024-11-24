@@ -5,11 +5,11 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 class LogisticRegression:
-    def __init__(self, learning_rate=0.01, num_iterations=1000):
+    def __init__(self, weights=None, bias=None, learning_rate=0.01, num_iterations=1000):
         self.learning_rate = learning_rate
         self.num_iterations = num_iterations
-        self.weights = None
-        self.bias = None
+        self.weights = weights
+        self.bias = bias
         self.losses = []  # To store loss values for plotting
 
     def sigmoid(self, z):

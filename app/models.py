@@ -63,6 +63,7 @@ class Product(BaseModel):
     picture = models.FileField(upload_to='product/', null=True, blank=True)
     seller = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="seller")
     is_sold = models.BooleanField(default=False)
+    is_returned = models.BooleanField(default=False)
     assigned_winner = models.BooleanField(default=False)
 
     def __str__(self) -> str:
@@ -91,6 +92,8 @@ class UserStatistics(BaseModel):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="statistics")
     total_item_listed = models.PositiveIntegerField(default=0)
     total_item_sold = models.PositiveIntegerField(default=0)
+    total_item_returned = models.PositiveIntegerField(default=0)
+    median_auction_price = models.FloatField(default=0)
 
     def __str__(self):
         return f"{self.user.email} - Listed: {self.total_item_listed}, Sold: {self.total_item_sold}"
