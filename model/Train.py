@@ -1,5 +1,5 @@
 import math
-from sklearn.metrics import roc_curve, roc_auc_score
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, roc_curve, roc_auc_score, accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_curve
 import pandas as pd
@@ -99,12 +99,22 @@ def main():
     model.plot_loss()
     print(model.bias)
     print(model.weights)
-    predictions = model.predict(X_test)
+    predictions, _ = model.predict(X_test)
     model.plot_confusion_matrix(y_test, predictions)
     print(model.calculate_accuracy(y_test, predictions))
     precision_curve(y_test, predictions)
     plot_roc_curve(y_test, predictions)
     plot_prediction_distribution(y_test, predictions)
+    accuracy = accuracy_score(y_test, predictions)
+    precision = precision_score(y_test, predictions)
+    recall = recall_score(y_test, predictions)
+    f1 = f1_score(y_test, predictions)
+
+    print("Confusion Matrix:\n", confusion_matrix(y_test, predictions))
+    print(f"Accuracy: {accuracy:.2f}")
+    print(f"Precision: {precision:.2f}")
+    print(f"Recall: {recall:.2f}")
+    print(f"F1-Score: {f1:.2f}")
     while True:
         x = int(input("enter autcion count: "))
         b = int(input("enter sale count: "))

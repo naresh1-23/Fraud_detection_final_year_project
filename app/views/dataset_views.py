@@ -28,7 +28,22 @@ def predict_model(request):
         sales_count = int(request.POST["sales_count"])
         item_listed = int(request.POST["item_listed"])
         return_count = int(request.POST["return_count"])
-        prediction = model.predict([[item_listed, sales_count, median_price, return_count]])
+        prediction, prob = model.predict([[item_listed, sales_count, median_price, return_count]])
         result = "Might be fraud" if prediction else "Might not be fraud"
-        return render(request, "model_checking/predict_model.html", {"result": result})
+        if sales_count > item_listed or (item_listed-sales_count) < return_count:
+            result = "Might be Fraud"
+            prob = [1.0]
+        weight_item_listed = model.weights[0]
+        weight_sales_count = model.weights[1]
+        weight_median_price = model.weights[2]
+        weight_return_count = model.weights[3]
+
+        return render(request, "model_checking/predict_model.html",
+                      {"result": result,
+                       "probability": prob[0],
+                       "bias": model.bias,
+                       "weight_item_listed": weight_item_listed,
+                       "weight_sales_count": weight_sales_count,
+                       "weight_median_price": weight_median_price,
+                       "weight_return_count": weight_return_count})
     return render(request, "model_checking/predict_model.html")
