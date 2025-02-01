@@ -7,7 +7,7 @@ from model.LogisticRegression import LogisticRegression
 
 
 def data_listing(request):
-    df = pd.read_csv('data/train_dataset.csv')
+    df = pd.read_csv('data/ebay_dataset.csv')
     csv_data = df.to_dict(orient='records')
 
     # Paginate the data
