@@ -10,14 +10,13 @@ class LogisticRegression:
         self.num_iterations = num_iterations
         self.weights = weights
         self.bias = bias
-        self.losses = []  # To store loss values for plotting
+        self.losses = []
 
     def sigmoid(self, z):
         z = np.clip(z, -500, 500)
         return 1 / (1 + np.exp(-z))
 
     def loss_function(self, y_true, y_pred):
-        """Binary cross-entropy loss function."""
         return -np.mean(y_true * np.log(y_pred + 1e-10) + (1 - y_true) * np.log(1 - y_pred + 1e-10))
 
     def fit(self, X, y):
@@ -25,7 +24,6 @@ class LogisticRegression:
         num_samples, num_features = X.shape
         self.weights = np.zeros(num_features)
         self.bias = 0
-
         for _ in range(self.num_iterations):
             linear_model = np.dot(X, self.weights) + self.bias
             y_predicted = self.sigmoid(linear_model)
@@ -36,7 +34,6 @@ class LogisticRegression:
 
             dw = (1 / num_samples) * np.dot(X.T, (y_predicted - y))
             db = (1 / num_samples) * np.sum(y_predicted - y)
-
             self.weights -= self.learning_rate * dw
             self.bias -= self.learning_rate * db
 
@@ -50,18 +47,6 @@ class LogisticRegression:
         correct_predictions = np.sum(y_true == y_pred)
         accuracy = correct_predictions / len(y_true)
         return accuracy
-
-    def plot_loss(self, filename='loss_plot.png'):
-        """Plot the loss over iterations and save it as an image."""
-        plt.figure(figsize=(10, 6))
-        plt.plot(range(self.num_iterations), self.losses, label='Loss', color='blue')
-        plt.title('Loss Over Iterations')
-        plt.xlabel('Iterations')
-        plt.ylabel('Loss')
-        plt.legend()
-        plt.grid()
-        plt.savefig(filename)
-        plt.close()  # Close the figure to free up memory
 
     def plot_confusion_matrix(self, y_true, y_pred, filename='confusion_matrix.png'):
         """Plot confusion matrix and save it as an image."""

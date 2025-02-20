@@ -52,6 +52,9 @@ def user_logout(request):
 
 def profile(request):
     user = request.user
+    if not user.is_authenticated:
+        messages.warning(request, "Login first")
+        return redirect("login")
     if request.method == "POST":
         email = request.POST.get('email')
         confirm_email = request.POST.get('confirm_email')

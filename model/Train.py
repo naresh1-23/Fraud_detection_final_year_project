@@ -38,13 +38,6 @@ def precision_curve(y_test, y_scores):
 
 
 def plot_roc_curve(y_test, y_scores):
-    """
-    Plot the ROC curve for the model.
-
-    Parameters:
-    - y_test: True labels
-    - y_scores: Predicted probabilities or decision scores
-    """
     fpr, tpr, thresholds = roc_curve(y_test, y_scores)
     auc_score = roc_auc_score(y_test, y_scores)
 
@@ -57,27 +50,6 @@ def plot_roc_curve(y_test, y_scores):
     plt.legend()
     plt.grid()
     plt.savefig("roc_curve.png")
-    plt.show()
-    plt.close()
-
-
-def plot_prediction_distribution(y_test, y_scores):
-    """
-    Plot the distribution of predicted probabilities.
-
-    Parameters:
-    - y_test: True labels
-    - y_scores: Predicted probabilities for the positive class
-    """
-    plt.figure(figsize=(8, 6))
-    plt.hist(y_scores[y_test == 0], bins=30, alpha=0.5, label="Class 0", color="blue")
-    plt.hist(y_scores[y_test == 1], bins=30, alpha=0.5, label="Class 1", color="red")
-    plt.title("Distribution of Predicted Probabilities")
-    plt.xlabel("Predicted Probability")
-    plt.ylabel("Frequency")
-    plt.legend()
-    plt.grid()
-    plt.savefig("predicted_probability_distribution.png")
     plt.show()
     plt.close()
 
@@ -96,7 +68,6 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=0)
 
     model.fit(X_train, y_train)
-    model.plot_loss()
     print(model.bias)
     print(model.weights)
     predictions, _ = model.predict(X_test)
@@ -104,7 +75,6 @@ def main():
     print(model.calculate_accuracy(y_test, predictions))
     precision_curve(y_test, predictions)
     plot_roc_curve(y_test, predictions)
-    plot_prediction_distribution(y_test, predictions)
     accuracy = accuracy_score(y_test, predictions)
     precision = precision_score(y_test, predictions)
     recall = recall_score(y_test, predictions)
