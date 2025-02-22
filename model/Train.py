@@ -57,10 +57,10 @@ def plot_roc_curve(y_test, y_scores):
 def main():
     df = pd.read_csv('data/ebay_dataset.csv')
     df = clean_csv(df)
-    model = LogisticRegression(learning_rate=0.0001, num_iterations=1500)
+    # ACtual num_iteration = 1500, learning rate = 0.0001
+    model = LogisticRegression(learning_rate=0.0001, num_iterations=500)
     print(df.head())
-    df = df.drop(columns=["EbayID", "SellerName", "AuctionSaleRatio",
-                 "MedianPriceDeviation", "ReturnRate", "HighReturnRate"])
+    df = df.drop(columns=["EbayID", "SellerName"])
     X = df.drop(columns=['is_fraud'])  # Replace 'is_fraud' with your actual target column name
     y = df['is_fraud']
     print(X)
